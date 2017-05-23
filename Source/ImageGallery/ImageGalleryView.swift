@@ -32,7 +32,7 @@ open class ImageGalleryView: UIView {
     let collectionView = UICollectionView(frame: CGRect.zero,
       collectionViewLayout: self.collectionViewLayout)
     collectionView.translatesAutoresizingMaskIntoConstraints = false
-    collectionView.backgroundColor = self.configuration.mainColor
+    collectionView.backgroundColor = self.configuration.galleryBackgroundColor
     collectionView.showsHorizontalScrollIndicator = false
     collectionView.dataSource = self
     collectionView.delegate = self
@@ -108,7 +108,7 @@ open class ImageGalleryView: UIView {
   }
 
   func configure() {
-    backgroundColor = configuration.mainColor
+    backgroundColor = configuration.galleryBackgroundColor
 
     collectionView.register(ImageGalleryViewCell.self,
                             forCellWithReuseIdentifier: CollectionView.reusableIdentifier)

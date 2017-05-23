@@ -4,13 +4,14 @@ public struct Configuration {
 
   // MARK: Colors
 
-  public var backgroundColor = UIColor(red: 0.15, green: 0.19, blue: 0.24, alpha: 1)
-  public var gallerySeparatorColor = UIColor.black.withAlphaComponent(0.6)
+  public var backgroundColor = UIColor.clear //UIColor(red: 0.15, green: 0.19, blue: 0.24, alpha: 1)
+  public var gallerySeparatorColor = UIColor.clear //UIColor.black.withAlphaComponent(0.6)
   public var mainColor = UIColor(red: 0.09, green: 0.11, blue: 0.13, alpha: 1)
+  public var galleryBackgroundColor = UIColor.clear //UIColor(red: 0.09, green: 0.11, blue: 0.13, alpha: 1)
   public var noImagesColor = UIColor(red: 0.86, green: 0.86, blue: 0.86, alpha: 1)
   public var noCameraColor = UIColor(red: 0.86, green: 0.86, blue: 0.86, alpha: 1)
   public var settingsColor = UIColor.white
-  public var bottomContainerColor = UIColor(red: 0.09, green: 0.11, blue: 0.13, alpha: 1)
+  public var bottomContainerColor = UIColor.clear //UIColor(red: 0.09, green: 0.11, blue: 0.13, alpha: 1)
 
   // MARK: Fonts
 
@@ -34,7 +35,7 @@ public struct Configuration {
 
   // MARK: Dimensions
 
-  public var cellSpacing: CGFloat = 2
+  public var cellSpacing: CGFloat = 5
   public var indicatorWidth: CGFloat = 41
   public var indicatorHeight: CGFloat = 8
 
@@ -43,9 +44,9 @@ public struct Configuration {
   public var canRotateCamera = true
   public var collapseCollectionViewWhileShot = true
   public var recordLocation = true
-  public var allowMultiplePhotoSelection = true
-  public var allowVideoSelection = false
-  public var showsImageCountLabel = true
+  public var allowMultiplePhotoSelection = false
+  public var allowVideoSelection = true
+  public var showsImageCountLabel = false
 
   // MARK: Images
   public var indicatorView: UIView = {
