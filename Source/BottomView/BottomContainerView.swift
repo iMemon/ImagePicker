@@ -43,8 +43,16 @@ open class BottomContainerView: UIView {
 
     return button
     }()
-
-  lazy var stackView = ImageStackView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+  
+//  lazy var stackView = ImageStackView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+  
+  lazy var stackView: UIImageView = { [unowned self] in
+    let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+    imageView.image = AssetManager.getImage(self.configuration.galleryImageName).withRenderingMode(.alwaysTemplate)
+    imageView.tintColor = UIColor.white
+    imageView.isUserInteractionEnabled = true
+    return imageView
+    }()
 
   lazy var topSeparator: UIView = { [unowned self] in
     let view = UIView()

@@ -1,6 +1,6 @@
 import UIKit
 import ImagePicker
-import Lightbox
+//import Lightbox
 
 class ViewController: UIViewController, ImagePickerDelegate {
 
@@ -56,16 +56,16 @@ class ViewController: UIViewController, ImagePickerDelegate {
   }
 
   func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
-    guard images.count > 0 else { return }
-
-    let lightboxImages = images.map {
-      return LightboxImage(image: $0)
-    }
-
-    let lightbox = LightboxController(images: lightboxImages, startIndex: 0)
-    imagePicker.present(lightbox, animated: true, completion: nil)
+//    guard images.count > 0 else { return }
+//
+//    let lightboxImages = images.map {
+//      return LightboxImage(image: $0)
+//    }
+//
+//    let lightbox = LightboxController(images: lightboxImages, startIndex: 0)
+//    imagePicker.present(lightbox, animated: true, completion: nil)
   }
-
+  
   func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
     imagePicker.dismiss(animated: true, completion: nil)
   }
