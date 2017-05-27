@@ -10,7 +10,7 @@ open class ImageStack {
   }
 
   open var assets = [PHAsset]()
-  fileprivate let imageKey = "image"
+  public let imageKey = "image"
 
   open func pushAsset(_ asset: PHAsset) {
     assets.append(asset)

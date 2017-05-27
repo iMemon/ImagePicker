@@ -5,6 +5,7 @@ import Photos
 @objc public protocol ImagePickerDelegate: class {
   
   func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage])
+  func selectedImage(_ imagePicker: ImagePickerController, image: UIImage)
   func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage])
   func cancelButtonDidPress(_ imagePicker: ImagePickerController)
 }
@@ -263,9 +264,17 @@ open class ImagePickerController: UIViewController {
   func adjustButtonTitle(_ notification: Notification) {
     guard let sender = notification.object as? ImageStack else { return }
     
-    let title = !sender.assets.isEmpty ?
-      configuration.doneButtonTitle : configuration.cancelButtonTitle
-    bottomContainer.doneButton.setTitle(title, for: UIControlState())
+//    let title = !sender.assets.isEmpty ?
+//      configuration.doneButtonTitle : configuration.cancelButtonTitle
+//    bottomContainer.doneButton.setTitle(title, for: UIControlState())
+    
+    // show image preview
+    if let asset = notification.userInfo?["image"] as? PHAsset {
+      let images = AssetManager.resolveAssets([asset]) as [UIImage]
+      if  images.count > 0{
+        self.delegate?.selectedImage(self, image: images[0])
+      }
+    }
   }
   
   // MARK: - Helpers
@@ -381,10 +390,16 @@ extension ImagePickerController: BottomContainerViewDelegate, UIImagePickerContr
     self.present(imagePickerController, animated: true, completion: nil)
   }
   
-  func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-    // TODO: show image preview
-    //        self.pickedImage = image
-    picker.dismiss(animated: true, completion: nil)
+  public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+      picker.dismiss(animated: true) {
+        // show image preview
+        self.delegate?.selectedImage(self, image: image)
+      }
+    } else {
+      picker.dismiss(animated: true, completion: nil)
+    }
+    
   }
   public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
     picker.dismiss(animated: true, completion: nil)

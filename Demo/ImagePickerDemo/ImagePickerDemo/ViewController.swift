@@ -1,6 +1,7 @@
 import UIKit
 import ImagePicker
 //import Lightbox
+import iOSPhotoEditor
 
 class ViewController: UIViewController, ImagePickerDelegate {
 
@@ -66,7 +67,37 @@ class ViewController: UIViewController, ImagePickerDelegate {
 //    imagePicker.present(lightbox, animated: true, completion: nil)
   }
   
+  func selectedImage(_ imagePicker: ImagePickerController, image: UIImage) {
+    let photoEditor = UIStoryboard(name: "PhotoEditor", bundle: Bundle(for: PhotoEditorViewController.self)).instantiateViewController(withIdentifier: "PhotoEditorViewController") as! PhotoEditorViewController
+    
+    photoEditor.photoEditorDelegate = self
+    photoEditor.image = image
+    
+    for i in 0...10 {
+      photoEditor.stickers.append(UIImage(named: i.description )!)
+    }
+    
+    imagePicker.present(photoEditor, animated: false, completion: nil)
+//    imagePicker.dismiss(animated: false) {
+//      self.present(photoEditor, animated: false, completion: nil)
+//    }
+  }
+  
   func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
     imagePicker.dismiss(animated: true, completion: nil)
+  }
+}
+
+extension ViewController: PhotoEditorDelegate {
+  
+  func imageEdited(image: UIImage) {
+    // TODO: Send Image
+    self.dismiss(animated: true) {
+      print("Send image")
+    }
+  }
+  
+  func editorCanceled() {
+    print("Canceled")
   }
 }
